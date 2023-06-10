@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  backend:
+    build: .
+    container_name: backend-server
+    env_file: 
+      - .env
+    ports:
+      - 9000:9000
+    networks:
+      - banking
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres
+    container_name: postgres-database
+    ports:
+      - 5432:5432
+    env_file:
+      - .env
+    networks:
+      - banking
+
+
+networks:
+  banking:
